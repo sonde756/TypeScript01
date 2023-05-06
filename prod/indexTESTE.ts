@@ -66,6 +66,7 @@ function userInput(num1: number | string, num2: number | string) {
 
 let value1 = document.getElementById("value1") as HTMLInputElement;
 let value2 = document.getElementById("value2") as HTMLInputElement;
+// @ts-ignore
 const btn = document.getElementById("btn") as HTMLButtonElement;
 const resultElement = document.getElementById("result") as HTMLElement;
 
@@ -76,10 +77,6 @@ btn.addEventListener("click", () => {
   console.log(result);
   resultElement.innerHTML = result.toString();
 });
-
-
-
-
 
 
 type User = {
@@ -107,4 +104,116 @@ const e1: employee = {
 let isDouglas: boolean = true
 
 console.log(`${isDouglas  ? 'Oh, Hi Douglas' : 'Who are you?'}`)
+
+
 // Dia 3 - Exercício 3
+/////////////////////////////////////////////////////////////////////----------////////////////////////////////////////////////////////
+
+
+class Users {
+  firsName: string
+  balace: number
+
+  constructor(n: string, b:number) {
+    this.firsName = n
+    this.balace = b
+  }
+
+  addMoney(amount: number){
+    this.balace += amount
+  }
+
+}
+
+const user1 = new Users('Edson', 10)
+//const user2 = new Users('Hudson', 20)
+
+
+
+console.log(user1)
+//console.log(user2)
+
+
+document.getElementById("name")!.innerHTML = user1.firsName
+
+let addB = document.getElementById("value") as HTMLInputElement
+
+// @ts-ignore
+let btn = document.getElementById("addBalance") as HTMLButtonElement
+
+document.getElementById("balance")!.innerHTML = String(user1.balace)
+
+
+btn.addEventListener("click", () => {
+  const value: number = Number(addB.value);
+  user1.addMoney(value);
+  document.getElementById("balance")!.innerHTML = String(user1.balace)
+
+});
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+interface Item {
+  name: string
+  price: number
+
+  itemMessage(message: string): void
+}
+
+const product1 = {
+  name: "Apple",
+  price: 2,
+  itemPurchased: function(message: string): void {
+    console.log(message + this.name);
+  }
+};
+
+
+
+product1.itemPurchased("Voce acabou de compra uma ")
+// Day 5 - Exercise 1
+
+interface Item {
+  id: number
+  title: string
+  variantId: number
+
+  itemMessage(message: string): void
+}
+
+// @ts-ignore
+const addToCart: Item = {
+  id: 1,
+  title: "Shoes",
+  variantId: 2,
+  itemMessage(message: string) {
+    console.log(message + this.title)
+  }
+
+}
+
+addToCart.itemMessage(`Adding ${addToCart.title} to cart`)
+
+
+// Day 5 - Exercise 4
+
+// @ts-ignore
+class Employee {
+  title: string;
+  salary: number;
+  constructor(title: string, salary: number) {
+    this.title = title;
+    this.salary = salary;
+  }
+}
+
+// refatorado
+
+// @ts-ignore
+class Employee {
+  constructor( public title: string, public salary: number) {}
+}
+
+
+
+const employee = new Employee('Engineer', 100000);
+
+console.log(`The new employee's title is ${employee.title} and they earn $ ${employee.salary}.`);
